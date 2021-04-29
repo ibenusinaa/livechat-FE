@@ -50,10 +50,10 @@ export class Chat extends React.Component {
                 })
 
                 if(index !== null){
-                    userTyping.push(index, 1)
-                    console.log(userTyping)
+                    userTyping.splice(index, 1)
                     this.setState({typing: userTyping})
                 }
+                console.log(userTyping)
             }else{
                 let userTyping = this.state.typing
                 let index = null
@@ -66,7 +66,8 @@ export class Chat extends React.Component {
 
                 if(index === null){
                     userTyping.push({
-                        user: message.user
+                        user: message.user,
+                        message: message.user
                     })
                     console.log(userTyping)
                     this.setState({typing: userTyping})
@@ -104,7 +105,7 @@ export class Chat extends React.Component {
             <div className='container'>
                 <div className='row justify-content-center my-3'>
                     <div className='col-12 col-sm-12 col-md-8 col-lg-6'>
-                        <div className='border rounded-0 shadow' style={{height : "85vh", overflow: "auto", position: 'relative'}} >
+                        <div className='border rounded-0 shadow' style={{height : "75vh", overflow: "auto", position: 'relative'}} >
                             <div className='bg-white p-3' style={{position: "sticky", top: "0px", right: "0px", left: "0px"}}>
                                 <h6 className='mb-n1'>{this.props.room}</h6>
                                 <span className='text-muted' style={{fontSize: 12}}>user online: 
@@ -206,6 +207,7 @@ export class Chat extends React.Component {
                             {
                                 this.state.typing?
                                     this.state.typing.map((value, index) => {
+                                        // if(value.user)
                                         return(
                                             <div className="row justify-content-start align-items-center mx-1">
                                                 <div className="px-2 py-2 mx-3 mb-3 rounded" style={{display: "inline-block", backgroundColor: '#ededed', fontStyle: 'italic'}}>
