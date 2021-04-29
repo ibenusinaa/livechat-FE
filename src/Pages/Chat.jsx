@@ -23,6 +23,7 @@ export class Chat extends React.Component {
             arrMessage.push(data)
             console.log(arrMessage)
             this.setState({historyChat: arrMessage})
+            this.scrollToBottom()
         })
 
         this.props.io.on('send-message-from-server', (data) => {
@@ -36,6 +37,7 @@ export class Chat extends React.Component {
             let array = this.state.message
             array.push(message)
             this.setState({message: array, typing: []})
+            this.scrollToBottom()
         })
 
         this.props.io.on('typing-back', (message) => {
@@ -71,12 +73,18 @@ export class Chat extends React.Component {
                     })
                     console.log(userTyping)
                     this.setState({typing: userTyping})
+
+                    this.scrollToBottom()
                 }
             }
         })
 
- 
+        this.scrollToBottom()
     }
+
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+      }
 
     onSendButton = () => {
         let message = {
@@ -107,8 +115,11 @@ export class Chat extends React.Component {
                     <div className='col-12 col-sm-12 col-md-8 col-lg-6'>
                         <div className='border rounded-0 shadow' style={{height : "75vh", overflow: "auto", position: 'relative'}} >
                             <div className='bg-white p-3' style={{position: "sticky", top: "0px", right: "0px", left: "0px"}}>
-                                <h6 className='mb-n1'>{this.props.room}</h6>
-                                <span className='text-muted' style={{fontSize: 12}}>user online: 
+                                {/* <button onClick={() => this.scrollToBottom()}>
+                                    test scroll
+                                </button> */}
+                                <h6 className='mb-n1' style={{zIndex: 2}}>{this.props.room}</h6>
+                                <span className='text-muted' style={{fontSize: 12, zIndex: 2}}>user online: 
                                     
 
                                     {
@@ -134,7 +145,7 @@ export class Chat extends React.Component {
                                     
                                 </span>
                             </div>
-                            <div className="alert alert-warning rounded-0 text-center mx-3 mt-3 mb-5" >
+                            <div className="alert alert-warning rounded-0 text-center mx-3 mt-3 mb-5"  style={{zIndex: -2}}>
                                 Hello, {this.props.username? this.props.username : null}
                             </div>
                             {
@@ -142,27 +153,38 @@ export class Chat extends React.Component {
                                     this.state.historyChat[0].map((value, index) => {
                                         if(value.user === this.props.username){
                                             return(
-                                                <div className="row justify-content-end align-items-center mx-1">
-                                                    <span className='text-muted mr-n2' style={{fontSize: 12}}>{(value.created_at).split(',')[1]}</span>
-                                                    <div className="px-2 py-2 mx-3 mb-3 bg-primary rounded text-white" style={{display: "inline-block"}}>
+                                                <div className="row justify-content-end align-items-end mx-1">
+                                                    <div className='text-muted mr-n2 mb-3' style={{fontSize: 12}}>{(value.created_at).split(',')[1]}</div>
+                                                    <div className="d-flex justify-content-end px-2 py-2 mx-3 mb-3 bg-primary rounded text-white" style={{display: "inline-block", maxWidth: '70%'}}>
                                                         {value.message}
                                                     </div>
                                                 </div>
                                             )
                                         }else{
                                             return(
-                                                <div className="row justify-content-start align-items-center mx-1">
-                                                    <div className= 'col-12 text-muted'>
+                                                <div className="row justify-content-start align-items-end mx-1">
+                                                    <div className= 'col-12 text-muted' style={{zIndex: -2}}>
                                                         {value.user}
                                                     </div>
-                                                    <div className="px-2 py-2 mx-3 mb-3 rounded" style={{display: "inline-block", backgroundColor: '#ededed'}}>
+                                                    <div className="px-2 py-2 mx-3 mb-3 rounded" style={{display: "inline-block", backgroundColor: '#ededed', maxWidth: '70%'}}>
                                                         {value.message}
                                                     </div>
-                                                    <span className='text-muted ml-n2' style={{fontSize: 12}}>{(value.created_at).split(',')[1]}</span>
+                                                    <div className='text-muted ml-n2 mb-3' style={{fontSize: 12}}>{(value.created_at).split(',')[1]}</div>
                                                 </div>
                                             )
                                         }
                                     })
+                                    
+                                :
+                                    null
+                            }
+                            {
+                                this.state.historyChat[0]?
+                                    <>
+                                        <div className='d-flex justify-content-center rounded mb-3' style={{fontStyle: 'italic', backgroundColor: '#ededed'}}>
+                                            <span className='text-muted my-2'>earlier message</span>
+                                        </div>
+                                    </>
                                 :
                                     null
                             }
@@ -179,23 +201,23 @@ export class Chat extends React.Component {
                                         }else{
                                             if(value.user === this.props.username){
                                                 return(
-                                                    <div className="row justify-content-end align-items-center mx-1">
-                                                        <span className='text-muted mr-n2' style={{fontSize: 12}}>{(value.created_at).split(',')[1]}</span>
-                                                        <div className="px-2 py-2 mx-3 mb-3 bg-primary rounded text-white" style={{display: "inline-block"}}>
+                                                    <div className="row justify-content-end align-items-end mx-1">
+                                                        <div className='text-muted mr-n2 mb-3' style={{fontSize: 12}}>{(value.created_at).split(',')[1]}</div>
+                                                        <div className="px-2 py-2 mx-3 mb-3 bg-primary rounded text-white" style={{display: "inline-block", maxWidth:'70%'}}>
                                                             {value.message}
                                                         </div>
                                                     </div>
                                                 )
                                             }else{
                                                 return(
-                                                    <div className="row justify-content-start align-items-center mx-1">
+                                                    <div className="row justify-content-start align-items-end mx-1">
                                                         <div className= 'col-12 text-muted'>
                                                             {value.user}
                                                         </div>
-                                                        <div className="px-2 py-2 mx-3 mb-3 rounded" style={{display: "inline-block", backgroundColor: '#ededed'}}>
+                                                        <div className="px-2 py-2 mx-3 mb-3 rounded" style={{display: "inline-block", backgroundColor: '#ededed', maxWidth:'70%'}}>
                                                             {value.message}
                                                         </div>
-                                                        <span className='text-muted ml-1' style={{fontSize: 12}}>{(value.created_at).split(',')[1]}</span>
+                                                        <div className='text-muted ml-1 mb-3' style={{fontSize: 12}}>{(value.created_at).split(',')[1]}</div>
                                                     </div>
                                                 )
                                             }
@@ -220,7 +242,11 @@ export class Chat extends React.Component {
                                     
                                     null
                             }
+                            <div style={{ float:"left", clear: "both" }}
+                                ref={(el) => { this.messagesEnd = el; }}>
+                            </div>
                         </div>
+                        
                         <div style={{height: '10vh'}} className='col-12 col-sm-12 col-md-12 col-lg-12 bg-white d-flex justfy-content-between border-bottom border-left border-right border-rounded shadow mb-3'>
                             <input type='text' placeholder='Type your message...' ref={(e) => this.message = e} onChange={() => this.onTyping()} className='form-control rounded-0 w-100 mx-3 my-3'  />
                             <button className='btn btn-primary rounded-circle mr-3 my-3' value='Send' onClick= {() => this.onSendButton()} >
@@ -233,16 +259,6 @@ export class Chat extends React.Component {
         )
     }
 }
-// enterTrigger = (e) => {
-//     e.preventDefault();
-
-//     console.log('Bebas')
-// }
-
-// <form onSubmit={this.onFormSubmit}>
-//                                     <input type='text' />
-//                                     <button type="submit" onClick={this.enterTrigger}>Submit</button>
-//                                 </form>
 
 
 export default Chat
