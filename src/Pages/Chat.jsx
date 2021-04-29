@@ -104,7 +104,7 @@ export class Chat extends React.Component {
             <div className='container'>
                 <div className='row justify-content-center my-3'>
                     <div className='col-12 col-sm-12 col-md-8 col-lg-6'>
-                        <div className='border rounded-0 shadow' style={{height : "630px", overflow: "auto", position: 'relative'}} >
+                        <div className='border rounded-0 shadow' style={{height : "85vh", overflow: "auto", position: 'relative'}} >
                             <div className='bg-white p-3' style={{position: "sticky", top: "0px", right: "0px", left: "0px"}}>
                                 <h6 className='mb-n1'>{this.props.room}</h6>
                                 <span className='text-muted' style={{fontSize: 12}}>user online: 
@@ -219,7 +219,7 @@ export class Chat extends React.Component {
                                     null
                             }
                         </div>
-                        <div className='col-12 col-sm-12 col-md-12 col-lg-12 bg-white d-flex justfy-content-between border-bottom border-left border-right border-rounded shadow mb-3'>
+                        <div style={{height: '10vh'}} className='col-12 col-sm-12 col-md-12 col-lg-12 bg-white d-flex justfy-content-between border-bottom border-left border-right border-rounded shadow mb-3'>
                             <input type='text' placeholder='Type your message...' ref={(e) => this.message = e} onChange={() => this.onTyping()} className='form-control rounded-0 w-100 mx-3 my-3'  />
                             <button className='btn btn-primary rounded-circle mr-3 my-3' value='Send' onClick= {() => this.onSendButton()} >
                                 <FontAwesomeIcon icon ={faPaperPlane} />
