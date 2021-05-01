@@ -21,12 +21,6 @@ export class Login extends React.Component{
         })
     }
 
-    // enterKey = (e) => {
-    //     if(e.key === 13){
-    //         this.onSubmit()
-    //     }
-    // }
-
     render() {
         return (
             <div className='container'>
