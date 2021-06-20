@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900");
+
+@keyframes moveInBottom {
+
+    0% {
+        opacity: 0;
+        transform: translateY(20%)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+:root {
+    --color-primary: #7f88d8;
+    --color-secondary: #f4f7f7;
+    --color-tertiary: #e8e9f7;
+    --color-tertiary-2: #0061a8; 
+    --color-white: #ffffff;
+    --color-black: #353535;
+    --color-message-replied-me: #ebe8e8;
+    --color-user-replied-me: #f7f7f7;
+    --color-message-replied: #8b8b8b; 
+    --color-reply-friends: #ededed;
+}
+
+
+a {
+    font-family: "Lato", sans-serif;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color:black;
+}
+
+div {
+    font-family: "Lato", sans-serif;
+}
+
+.livechat-image {
+    background-image: url('./undraw_Group_chat_re_frmo.png');
+    width: 100%;
+    height: 100%;
+} 
+
+/* all about my chat */
+
+.my-chat {
+    position: relative;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 1rem 1rem 0 1rem;
+    cursor: pointer;
+    max-width: 70%;
+    padding: .8rem;
+    margin: 0 1rem 1rem 1rem;
+}
+
+.my-chat:hover .reply-me {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0rem);
+}
+
+.message-replied-me {
+    font-size: .8rem; 
+    border-bottom: 1px solid white;
+    color: var(--color-message-replied-me);
+    padding-bottom: .5rem;
+}
+
+.reply-me {
+    position: absolute;
+    right: 1rem;
+    top: .2rem;
+    background-color: var(--color-primary);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(.6rem);
+    transition: all .35s;
+}
+
+.user-replied-me {
+    font-weight: 700;
+    font-size: .8rem;
+    color: var(--color-user-replied-me);
+}
+
+/* friends chat */
+
+.friends-chat {
+    position: relative;
+    background-color: var(--color-secondary);
+    color: var(--color-black);
+    max-width: 70%;
+    border-radius: 1rem 1rem 1rem 0px;
+    padding: .8rem;
+    margin: 0 1rem 1rem 1rem;
+}
+
+.friends-chat:hover .reply-friends {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0rem);
+}
+
+.message-replied {
+    font-size: .8rem; 
+    border-bottom: 1px solid black;
+    color: var(--color-message-replied);
+    padding-bottom: .5rem;
+}
+
+.reply-friends {
+    position: absolute;
+    right: 1rem;
+    top: .2rem;
+    background-color: var(--color-secondary);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(.6rem);
+    transition: all .35s;
+}
+
+/* general chat */
+
+.message-font {
+    font-size: .85rem;
+}
+
+.user-replied {
+    font-weight: 700;
+    font-size: .8rem;
+}
+
+/* input chat popup */
+
+.popup-reply-message {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: -3.2rem;
+    left: 0;
+    padding: .25rem 2rem .25rem 2rem;
+    background-color: var(--color-tertiary);
+    color: var(--color-black);
+    width: 100%;
+
+    animation-name: moveInBottom;
+    animation-duration: .2s;
+    animation-timing-function: linear;
+}
+
+.close-button {
+    position: absolute;
+    top: .2rem;
+    right: .5rem;
+    cursor: pointer
+}
+
+.send-button {
+    color: var(--color-primary);
+    font-size: 1.2rem
+}
+
+.char_notification {
+    position: absolute;
+    top: -2.5rem;
+    left: 0;
+    padding: .5rem 2rem;
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+    width: 100%;
+    animation-name: moveInBottom;
+    animation-duration: .2s;
+    animation-timing-function: linear;
+}
+
+.char_notification_red {
+    position: absolute;
+    top: -2.5rem;
+    left: 0;
+    padding: .5rem 2rem;
+    background-color: #fff3cd;
+    color: red;
+    border-color: #ffeeba;
+    width: 100%;
+    animation-name: moveInBottom;
+    animation-duration: .2s;
+    animation-timing-function: linear;
+}
+
+.chat-input {
+    font-size: 1rem;
+    font-family: inherit;
+    padding: .25rem .6rem;
+    color: var(--color-black);
+    border-radius: .25rem;
+    margin: 1rem;
+    border: 1px solid var(--color-message-replied);
+    width: 100%;
+    transition: all .3s;
+}
+
+.chat-input:focus {
+    outline: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid var(--color-primary);
+}
+
+.welcome-notification {
+    z-index: -2;
+    text-align: center;
+    margin: 1rem;
+    border-radius: .25rem;
+    padding: .75rem 1.25rem;
+    background-color: var(--color-tertiary);
+    color: var(--color-black)
+}

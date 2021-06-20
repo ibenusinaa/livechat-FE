@@ -4,7 +4,13 @@ import Login from './Pages/Login'
 
 // Socket.io
 import socket from 'socket.io-client'
-const io = socket('https://livechat-pwdk.herokuapp.com/')
+
+// css
+import './stylesheets/utils.css'
+
+const io = socket('http://localhost:5000/')
+
+
 
 class App extends React.Component{
 
